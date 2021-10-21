@@ -15,9 +15,16 @@ const App = () => {
     fetchDoggies();
   }, [])
 
+  
   return (
     <div>
       Hello World
+      {dogs.map(d => (
+        <>
+        <p key={d._id}>{d.name}</p>
+        <img src={d.image._meta.url} alt={d.name} />
+        </>
+      ))}
     </div>
   )
 }
