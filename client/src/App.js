@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Header from './components/Header';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 const App = () => {
 
@@ -17,15 +25,16 @@ const App = () => {
 
   
   return (
-    <div>
+    <Wrapper>
+      <Header />
       Hello World
-      {dogs.map(d => (
+      {/* {dogs.map(d => (
         <>
         <p key={d._id}>{d.name}</p>
         <img src={d.image._meta.url} alt={d.name} />
         </>
-      ))}
-    </div>
+      ))} */}
+    </Wrapper>
   )
 }
 
