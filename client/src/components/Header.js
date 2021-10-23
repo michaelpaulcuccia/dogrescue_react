@@ -91,7 +91,7 @@ const Header = () => {
     <Container>
       <LogoAndIcon>
         <h2>Dog Rescue</h2>
-        <i class="fas fa-paw"></i>
+        <i className="fas fa-paw"></i>
       </LogoAndIcon>
       <MidSection>
         <EyebrowContainer>
