@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -9,32 +8,29 @@ const Container = styled.div`
 `;
 
 const Search = () => {
-  const { register, handleSubmit } = useForm();
   const [gender, setGender] = useState("");
+  const [showSelection, setShowSelection] = useState(false);
 
-  let search = {};
-
-  const handleGender = async (data) => {
-    console.log(data.gender);
-    search.gender = data.gender;
-    console.log(search);
-    setGender(data.gender);
-    console.log(gender);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //show selection
+    setShowSelection(true);
   };
 
   return (
     <Container>
       <h3>Good Boy? Or, Good Girl?</h3>
-      <form onSubmit={handleSubmit(handleGender)}>
-        <select {...register("gender")}>
-          <option value="" disabled selected>
-            Choose Boy or Girl
+      <form onSubmit={handleSubmit}>
+        <select onChange={(e) => setGender(e.target.value)}>
+          <option disabled selected>
+            Select your option
           </option>
-          <option value="female">female</option>
-          <option value="male">male</option>
+          <option value="boy">Boy</option>
+          <option value="girl">Girl</option>
         </select>
-        <input type="submit" />
+        <button type="submit">Submit</button>
       </form>
+      {showSelection && <h2>You have chosen {gender}!</h2>}
     </Container>
   );
 };
