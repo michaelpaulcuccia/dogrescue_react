@@ -30,7 +30,7 @@ const SearchTwo = props => {
         } else {
             setGenderInBreed(genderInBreedFilter);
             setShowBreedForm(true);
-        }
+        };
     }; 
     // STEP 3C: Set Selected Breed
     const [breed, setBreed] = useState('');
@@ -41,8 +41,7 @@ const SearchTwo = props => {
     const filterRemaining = () => {
         let remainingDogs = genderInBreed.filter(dog => dog.breed === breed);
         setDogsToShow(remainingDogs);
-    }
-    
+    };    
 
     //FUNCTION: "GENDER"
     const handleGenderSubmit = (event) => {
@@ -97,10 +96,11 @@ const SearchTwo = props => {
                 dogsToShow.map((item, i) => (
                     <div key={i}>
                         <p>Name: {item.name}</p>
-                        <img src={item.image._meta.url} alt={item.name} />
+                        <img src={item.image._meta.url} alt={item.name} style={{height: '100px', width: '100px'}}/>
                     </div>
                 ))
             }
+
         </>
     )
 }
