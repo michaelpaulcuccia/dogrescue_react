@@ -101,7 +101,7 @@ const ResultsContainer = styled.div`
 
 const Search = props => {
 
-  const [dogs, setDogs] = useState([])
+  const [dogs, setDogs] = useState([]);
   const [gender, setGender] = useState("");
   const [showGenderSelection, setShowGenderSelection] = useState(false);
   const [showGenderForm, setShowGenderForm] = useState(true);

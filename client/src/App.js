@@ -34,7 +34,6 @@ const App = () => {
               )}
             />
         </Switch>
-        {/* <Route path='/' component={Home} exact /> */}
       </Wrapper>
     </Router>
   
