@@ -108,7 +108,8 @@ const Search = props => {
   const [showSelectBreed, setShowSelectBreed] = useState(false)
   const [breed, setBreed] = useState("");
   const [showBreedForm, setShowBreedForm] = useState(true);
-  const [showBreedChoice, setShowBreedChoice] = useState(false)
+  const [showBreedChoice, setShowBreedChoice] = useState(false);
+  const [numberOfGenderInBreed, setNumberOfGenderInBreed] = useState('');
 
   useEffect(()=> {
     setDogs(props.dogs);
@@ -116,8 +117,6 @@ const Search = props => {
 
   let boyDogs = dogs.filter(dog => dog.sex === 'male');
   let girlDogs = dogs.filter(dog => dog.sex === 'female');
-
-  //TODO: create a breed filter function using gender
 
   const handleGenderSubmit = (event) => {
     event.preventDefault();
@@ -130,6 +129,23 @@ const Search = props => {
     event.preventDefault();
     setShowBreedForm(false);
     setShowBreedChoice(true);
+    genderAndBreed();
+  }
+
+  const genderAndBreed = () => {
+    //filter all dogs in by breed
+    let rightBreed = dogs.filter(dog => dog.breed === breed);
+    console.log(rightBreed);
+    //filter breed by gender
+    let genderAndBreed = rightBreed.filter(dog => dog.sex === gender);
+    console.log(genderAndBreed);
+
+    if (genderAndBreed.length >= 1) {
+      setNumberOfGenderInBreed(genderAndBreed.length);
+    } else {
+      setNumberOfGenderInBreed('nada');
+    }
+
   }
 
   return (
@@ -146,8 +162,8 @@ const Search = props => {
                 <option disabled selected>
                   Select your option
                 </option>
-                <option value="boy">Boy</option>
-                <option value="girl">Girl</option>
+                <option value="male">Boy</option>
+                <option value="female">Girl</option>
               </select>
               <button type="submit">Submit</button>
             </form>
@@ -182,8 +198,13 @@ const Search = props => {
 
       <ResultsContainer>
         {showGenderSelection && <h2>You have chosen a {gender}!</h2>}
-        {gender !== "" && gender === 'boy' && showGenderSelection ? <p>There are {boyDogs.length} boys</p> : gender !== "" && gender === 'girl' && showGenderSelection ? <p>There are {girlDogs.length} girls</p>  : "" }
+        {gender !== "" && gender === 'male' && showGenderSelection ? <p>There are {boyDogs.length} boys</p> : 
+        gender !== "" && gender === 'female' && showGenderSelection ? <p>There are {girlDogs.length} girls</p>  : 
+        "" }
         {showBreedChoice && <h2>You have chosen {breed}!</h2>}
+        {numberOfGenderInBreed && numberOfGenderInBreed !== "nada" ? <p>There are {numberOfGenderInBreed} {gender} {breed}s</p> :
+        numberOfGenderInBreed && numberOfGenderInBreed === "nada" ? <p>There are no {gender} {breed}s</p> :
+        ""}
       </ResultsContainer>
 
     </Container>
