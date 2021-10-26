@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Card from './Card';
 import * as palette from '../constants/palette';
 import boyDog from '../images/boyDog.svg';
 import girlDog from '../images/girlDog.svg';
-
-//TO DO: 1. after selecting breed, hide breed form, 2. style dog display cards
 
 const HeadlineContainer = styled.div`
     width: 100%;
@@ -103,7 +102,13 @@ const BreedDropdown = styled.select`
         font-weight: 700;
     }
 
+`;
 
+const CardContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 `;
 
 const SearchTwo = props => {
@@ -148,6 +153,7 @@ const SearchTwo = props => {
         let remainingDogs = genderInBreed.filter(dog => dog.breed === breed);
         setDogsToShow(remainingDogs);
     };    
+    // STEP 4B: After selecting breed, hide breed form
 
     //FUNCTION: "GENDER"
     const handleGenderSubmit = (event) => {
@@ -160,11 +166,12 @@ const SearchTwo = props => {
     const handleBreedSubmit = (event) => {
         event.preventDefault();
         filterRemaining();
+        setShowBreedForm(!showBreedForm)
     }
 
     return (
         <>
-
+    
             {
                 showGenderForm &&
                 <>
@@ -211,16 +218,30 @@ const SearchTwo = props => {
                     </>
             }
 
+            <CardContainer>
             {
+             
                 dogsToShow !== [] &&
                 dogsToShow.map((item, i) => (
-                    <div key={i}>
-                        <p>Name: {item.name}</p>
-                        <img src={item.image._meta.url} alt={item.name} style={{height: '100px', width: '100px'}}/>
-                    </div>
+                    <Card key={i} 
+                        image={item.image._meta.url}
+                        name={item.name}
+                        age={item.birthDay ? `born ${item.birthDay}` : `approximately ${item.ageGuessMonths} months`}
+                        weight={item.weightPounds}
+                        disability={item.disability ? item.disability : ""}
+                        rescue={item.rescue ? 'yes' : ""}
+                        kidFriendly={item.kidFriendly ? "yes" : "no"}
+                        catFriendly={item.catFriendly ? "yes" : "no"}
+                        onlyDog={item.only ? "no" : "gets along with other dogs!"}
+                        houseTrained={item.houseTrained ? "yes" : "needs some help!"}
+                        leashTrained={item.leashTrained ? "yes" : "needs some help!"}
+                        inFoster={item.inFoster ? "yes" : ""}
+                        notes={item.notes ? item.notes : ""}
+                    />                    
                 ))
+              
             }
-
+            </CardContainer>
         </>
     )
 }
