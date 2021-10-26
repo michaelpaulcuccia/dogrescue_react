@@ -131,15 +131,26 @@ const SearchTwo = props => {
     const [showBreedForm, setShowBreedForm] = useState(false);
     // STEP 3B-1: Filter Breed by Gender Selected and Pass to Map of Breeds
     const [genderInBreed, setGenderInBreed] = useState([]);
+    // STEP 3B-1a: Need to pass filter of gender and breed to final state where cards are shown
+    const [filteredArrayForCards, setFilteredArrayForCards] = useState([]);
     // STEP 3B-2: Function to get genderInBreed state
     const handleGenderAndBreed = () => {
         let genderInBreedFilter = dogs.filter(dog => dog.sex === gender);
-        console.log(genderInBreed)
+        // STEP 3B-2a: Remove duplicates
+        let cleanedUpBreeds = []
+        for (let i = 0; i < genderInBreedFilter.length; i++){
+            if (cleanedUpBreeds.includes(genderInBreedFilter[i].breed)) {
+                continue;
+            } else {
+                cleanedUpBreeds.push(genderInBreedFilter[i].breed);
+            }
+        }
         if (!genderInBreedFilter.length) {
             //TO DO: update error message
             alert('No Dogs of this gender available');
         } else {
-            setGenderInBreed(genderInBreedFilter);
+            setFilteredArrayForCards(genderInBreedFilter)
+            setGenderInBreed(cleanedUpBreeds);
             setShowBreedForm(true);
         };
     }; 
@@ -150,7 +161,7 @@ const SearchTwo = props => {
     const [dogsToShow, setDogsToShow] = useState([]);
     // STEP 4A: Create An Array of Remaining Dogs of Gender/Breed and Display
     const filterRemaining = () => {
-        let remainingDogs = genderInBreed.filter(dog => dog.breed === breed);
+        let remainingDogs = filteredArrayForCards.filter(dog => dog.breed === breed);
         setDogsToShow(remainingDogs);
     };    
     // STEP 4B: After selecting breed, hide breed form
@@ -209,7 +220,7 @@ const SearchTwo = props => {
                                         Select a Breed
                                     </option>
                                         {genderInBreed.map((item, i)=> (
-                                        <option key={i} value={item.breed}>{item.breed}
+                                        <option key={i} value={item}>{item}
                                     </option>))}
                                 </BreedDropdown>
                                 <button type="submit">Submit</button>

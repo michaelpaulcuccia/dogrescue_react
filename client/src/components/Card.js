@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-//import * as palette from '../constants/palette';
 
 const Container = styled.div`
     padding: 10px;
@@ -11,6 +10,8 @@ const Container = styled.div`
     border-radius: 25px;
     border: 2px solid black;  
     font-family: "Gochi Hand", cursive;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
 
     img {
         margin-bottom: 5px;
