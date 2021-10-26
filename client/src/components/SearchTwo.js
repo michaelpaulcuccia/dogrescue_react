@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+//import styled from 'styled-components';
+//import boyDog from '../images/boyDog.svg';
+//import girlDog from '../images/girlDog.svg';
+//https://stackoverflow.com/questions/30663562/use-images-like-checkboxes/30663705
+
 
 const SearchTwo = props => {
 
@@ -65,9 +70,20 @@ const SearchTwo = props => {
                 <h2>Select Dog's Gender</h2>
                 <form onSubmit={handleGenderSubmit}>
                     <label>Male</label>
-                    <input type='radio' id='male' name='male' value='male' onChange={event => setGender(event.target.value)}/>
+                    <input 
+                    type='checkbox' 
+                    id='male' 
+                    name='male' 
+                    value='male' 
+                    onChange={event => setGender(event.target.value)}
+                    style={{
+                        height: '40px',
+                        width: '40px',
+                        border: '5px solid blue'
+                    }}
+                    />
                     <label>Female</label>
-                    <input type='radio' id='female' name='female' value='female' onChange={event => setGender(event.target.value)}/>
+                    <input type='checkbox' id='female' name='female' value='female' onChange={event => setGender(event.target.value)}/>
                     <button type="submit">Submit</button>
                 </form>
                 </>
