@@ -1,9 +1,110 @@
 import React, { useState, useEffect } from 'react';
-//import styled from 'styled-components';
-//import boyDog from '../images/boyDog.svg';
-//import girlDog from '../images/girlDog.svg';
-//https://stackoverflow.com/questions/30663562/use-images-like-checkboxes/30663705
+import styled from 'styled-components';
+import * as palette from '../constants/palette';
+import boyDog from '../images/boyDog.svg';
+import girlDog from '../images/girlDog.svg';
 
+//TO DO: 1. after selecting breed, hide breed form, 2. style dog display cards
+
+const HeadlineContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+
+    h2 {
+        color: ${palette.PURPLE};
+        font-family: "Gochi Hand", cursive;
+        font-size: 36px;
+    }
+`;
+
+const TileContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
+const MaleTile = styled.div`
+    height: 150px;
+    width: 150px;
+    background-image: url(${boyDog});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 3px solid ${palette.DOG_BLUE};
+    border-radius: 25px;
+    cursor: pointer;
+    margin-right: 7.5px;
+
+    &:hover {
+        border: 5px solid ${palette.DOG_BLUE};
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+`;
+
+const FemaleTile = styled.div`
+    height: 150px;
+    width: 150px;
+    background-image: url(${girlDog});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 3px solid ${palette.PINK};
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 7.5px;
+
+    &:hover {
+        border: 5px solid ${palette.PINK};
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+`;
+
+const BreedFormContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        display: block;
+        margin: 15px auto;
+        height: 30px;
+        width: 80px;
+        border: 2px solid ${palette.PURPLE};
+        border-radius: 25px;
+        color: ${palette.PURPLE};
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover {
+            border: 3px solid ${palette.PURPLE};
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
+            font-weight: 700;
+        }
+    }
+    
+`;
+
+const BreedDropdown = styled.select`
+    border: 2px solid ${palette.PURPLE};
+    border-radius: 25px;
+    padding: 7px 5px;
+    color: ${palette.PURPLE};
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+        border: 3px solid ${palette.PURPLE};
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
+        font-weight: 700;
+    }
+
+
+`;
 
 const SearchTwo = props => {
 
@@ -67,43 +168,46 @@ const SearchTwo = props => {
             {
                 showGenderForm &&
                 <>
-                <h2>Select Dog's Gender</h2>
-                <form onSubmit={handleGenderSubmit}>
-                    <label>Male</label>
-                    <input 
-                    type='checkbox' 
-                    id='male' 
-                    name='male' 
-                    value='male' 
-                    onChange={event => setGender(event.target.value)}
-                    style={{
-                        height: '40px',
-                        width: '40px',
-                        border: '5px solid blue'
-                    }}
-                    />
-                    <label>Female</label>
-                    <input type='checkbox' id='female' name='female' value='female' onChange={event => setGender(event.target.value)}/>
-                    <button type="submit">Submit</button>
-                </form>
+                    <HeadlineContainer>
+                        <h2>Select Dog's Gender</h2>
+                    </HeadlineContainer>
+                    {/* NOTE: clicking a tile will trigger onSubmit */}
+                    <form onSubmit={handleGenderSubmit}>
+                        <TileContainer>
+                            <MaleTile 
+                                as='button'
+                                value='male'
+                                onClick={event => setGender(event.target.value)}
+                            />
+                            <FemaleTile 
+                                as='button'
+                                value='female'
+                                onClick={event => setGender(event.target.value)}
+                            />     
+                        </TileContainer>           
+                    </form>
                 </>
             }
 
             {
                 showBreedForm &&               
                     <>
-                        <h2>Select a {gender} among these breeds</h2>
+                        <HeadlineContainer>
+                            <h2>Select a {gender} among these breeds</h2>
+                        </HeadlineContainer>
+                            <BreedFormContainer>
                             <form onSubmit={handleBreedSubmit}>
-                                 <select onChange={(e) => setBreed(e.target.value)}>
+                                 <BreedDropdown onChange={(e) => setBreed(e.target.value)}>
                                     <option disabled selected>
                                         Select a Breed
                                     </option>
                                         {genderInBreed.map((item, i)=> (
                                         <option key={i} value={item.breed}>{item.breed}
                                     </option>))}
-                                </select>
+                                </BreedDropdown>
                                 <button type="submit">Submit</button>
                             </form>
+                            </BreedFormContainer>
                     </>
             }
 
