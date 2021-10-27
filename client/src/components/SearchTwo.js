@@ -81,7 +81,7 @@ const BreedFormContainer = styled.div`
         &:hover {
             border: 3px solid ${palette.PURPLE};
             box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
-            font-weight: 700;
+            font-weight: 600;
         }
     }
     
@@ -99,7 +99,7 @@ const BreedDropdown = styled.select`
     &:hover {
         border: 3px solid ${palette.PURPLE};
         box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
-        font-weight: 700;
+        font-weight: 600;
     }
 
 `;
@@ -109,6 +109,15 @@ const CardContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 15px;
+`;
+
+const ResetButton = styled.button`
+    height: 40px;
+    width: 75px;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
 `;
 
 const SearchTwo = props => {
@@ -180,8 +189,21 @@ const SearchTwo = props => {
         setShowBreedForm(!showBreedForm)
     }
 
+    const handleReset = () => {
+        setShowGenderForm(true);
+        setGender('');
+        setShowBreedForm(false);
+        setGenderInBreed([]);
+        setFilteredArrayForCards([]);
+        setDogsToShow([]);
+    }
+
     return (
         <>
+
+            <ResetButton onClick={handleReset}>
+                Reset Form
+            </ResetButton>
     
             {
                 showGenderForm &&
