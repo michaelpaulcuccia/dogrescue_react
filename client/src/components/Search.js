@@ -1,215 +1,293 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Card from './Card';
 import * as palette from '../constants/palette';
+import boyDog from '../images/boyDog.svg';
+import girlDog from '../images/girlDog.svg';
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const HeadlineContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+
+    h2 {
+        color: ${palette.PURPLE};
+        font-family: "Gochi Hand", cursive;
+        font-size: 36px;
+    }
 `;
 
-const QuestionContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
+const TileContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
-const GenderContainer = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15px;
+const MaleTile = styled.div`
+    height: 150px;
+    width: 150px;
+    background-image: url(${boyDog});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 3px solid ${palette.DOG_BLUE};
+    border-radius: 25px;
+    cursor: pointer;
+    margin-right: 7.5px;
 
-  h3 {
-    font-family: "Gochi Hand", cursive;
-    font-size: 28px;
-    padding-bottom: 10px;
+    &:hover {
+        border: 5px solid ${palette.DOG_BLUE};
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+`;
+
+const FemaleTile = styled.div`
+    height: 150px;
+    width: 150px;
+    background-image: url(${girlDog});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 3px solid ${palette.PINK};
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 7.5px;
+
+    &:hover {
+        border: 5px solid ${palette.PINK};
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+`;
+
+const BreedFormContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        display: block;
+        margin: 15px auto;
+        height: 25px;
+        width: 80px;
+        border: 2px solid ${palette.PURPLE};
+        border-radius: 25px;
+        color: ${palette.PURPLE};
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover {
+            border: 3px solid ${palette.PURPLE};
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
+            font-weight: 600;
+        }
+    }
+    
+`;
+
+const BreedDropdown = styled.select`
+    border: 2px solid ${palette.PURPLE};
+    border-radius: 25px;
+    padding: 3px 0;
     color: ${palette.PURPLE};
-  }
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
 
-  select {
-    border-radius: 5px;
-    padding: 3px;
-    margin-right: 2.5px;
-  }
+    &:hover {
+        border: 3px solid ${palette.PURPLE};
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
+        font-weight: 600;
+    }
 
-  button {
-    border-radius: 5px;
+`;
+
+const CardContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    `;
+
+const ResetContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
+const ResetButton = styled.button`
+    height: 30px;
+    width: 85px;
+    font-size: 12px;
     padding: 3px;
+    border-radius: 5px;
     background-color: ${palette.PURPLE};
-    color: ${palette.WHITE};
-    margin-left: 2.5px;
-  }
-
-  h2 {
-    font-family: "Gochi Hand", cursive;
-    font-size: 28px;
-    padding-top: 10px;
-    color: ${palette.PURPLE};
-  }
-`;
-
-const BreedContainer = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-top: 15px;
-
-  h3 {
-    font-family: "Gochi Hand", cursive;
-    font-size: 28px;
-    padding-bottom: 10px;
-    color: ${palette.PURPLE};
-  }
-
-  select {
-    border-radius: 5px;
-    padding: 3px;
-    margin-right: 2.5px;
-  }
-
-  button {
-    border-radius: 5px;
-    padding: 3px;
-    background-color: ${palette.PURPLE};
-    color: ${palette.WHITE};
-    margin-left: 2.5px;
-  }
-
-  h2 {
-    font-family: "Gochi Hand", cursive;
-    font-size: 28px;
-    padding-top: 10px;
-    color: ${palette.PURPLE};
-  }
-`;
-
-const ResultsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15px;
-
-  h2, p {
-    font-family: "Gochi Hand", cursive;
-    font-size: 28px;
-    color: ${palette.PURPLE};
-  }
+    color: ${palette.OFF_WHITE};
 `;
 
 const Search = props => {
 
-  const [dogs, setDogs] = useState([]);
-  const [gender, setGender] = useState("");
-  const [showGenderSelection, setShowGenderSelection] = useState(false);
-  const [showGenderForm, setShowGenderForm] = useState(true);
-  const [showSelectBreed, setShowSelectBreed] = useState(false)
-  const [breed, setBreed] = useState("");
-  const [showBreedForm, setShowBreedForm] = useState(true);
-  const [showBreedChoice, setShowBreedChoice] = useState(false);
-  const [numberOfGenderInBreed, setNumberOfGenderInBreed] = useState('');
+    // STEP 1A: Set A State for Dogs
+    const [dogs, setDogs] = useState([]);
+    // STEP 1B: Get Dogs from Props
+    useEffect(()=> {
+        setDogs(props.dogs);
+        //Gender Test
+        //setDogs(props.dogs.filter(dog => dog.sex === 'male'));
+    },[props]);
 
-  useEffect(()=> {
-    setDogs(props.dogs);
-  },[props]);
+    // STEP 2A: Get Gender
+    const [gender, setGender] = useState('');
+    // STEP 2B: Remove Gender Form
+    const [showGenderForm, setShowGenderForm] = useState(true);
 
-  let boyDogs = dogs.filter(dog => dog.sex === 'male');
-  let girlDogs = dogs.filter(dog => dog.sex === 'female');
+    //STEP 3A: Show Breed Form
+    const [showBreedForm, setShowBreedForm] = useState(false);
+    // STEP 3B-1: Filter Breed by Gender Selected and Pass to Map of Breeds
+    const [genderInBreed, setGenderInBreed] = useState([]);
+    // STEP 3B-1a: Need to pass filter of gender and breed to final state where cards are shown
+    const [filteredArrayForCards, setFilteredArrayForCards] = useState([]);
+    // STEP 3B-2: Function to get genderInBreed state
+    const handleGenderAndBreed = () => {
+        let genderInBreedFilter = dogs.filter(dog => dog.sex === gender);
+        // STEP 3B-2a: Remove duplicates
+        let cleanedUpBreeds = []
+        for (let i = 0; i < genderInBreedFilter.length; i++){
+            if (cleanedUpBreeds.includes(genderInBreedFilter[i].breed)) {
+                continue;
+            } else {
+                cleanedUpBreeds.push(genderInBreedFilter[i].breed);
+            }
+        }
+        if (!genderInBreedFilter.length) {
+            //TO DO: update error message
+            alert('No Dogs of this gender available');
+        } else {
+            setFilteredArrayForCards(genderInBreedFilter)
+            setGenderInBreed(cleanedUpBreeds);
+            setShowBreedForm(true);
+        };
+    }; 
+    // STEP 3C: Set Selected Breed
+    const [breed, setBreed] = useState('');
 
-  const handleGenderSubmit = (event) => {
-    event.preventDefault();
-    setShowGenderSelection(true);
-    setShowGenderForm(false);
-    setShowSelectBreed(true);
-  };
+    // STEP 4A-1: Filter Remaining Dogs after gender and breed are selected
+    const [dogsToShow, setDogsToShow] = useState([]);
+    // STEP 4A: Create An Array of Remaining Dogs of Gender/Breed and Display
+    const filterRemaining = () => {
+        let remainingDogs = filteredArrayForCards.filter(dog => dog.breed === breed);
+        setDogsToShow(remainingDogs);
+    };    
+    // STEP 4B: After selecting breed, hide breed form
 
-  const handleBreedSubmit = (event) => {
-    event.preventDefault();
-    setShowBreedForm(false);
-    setShowBreedChoice(true);
-    genderAndBreed();
-  }
+    //FUNCTION: "GENDER"
+    const handleGenderSubmit = (event) => {
+        event.preventDefault();
+        setShowGenderForm(false);
+        handleGenderAndBreed();
+    };
 
-  const genderAndBreed = () => {
-    //filter all dogs in by breed
-    let rightBreed = dogs.filter(dog => dog.breed === breed);
-    console.log(rightBreed);
-    //filter breed by gender
-    let genderAndBreed = rightBreed.filter(dog => dog.sex === gender);
-    console.log(genderAndBreed);
-
-    if (genderAndBreed.length >= 1) {
-      setNumberOfGenderInBreed(genderAndBreed.length);
-    } else {
-      setNumberOfGenderInBreed('nada');
+    //FUNCTION: "BREED"
+    const handleBreedSubmit = (event) => {
+        event.preventDefault();
+        filterRemaining();
+        setShowBreedForm(!showBreedForm)
     }
 
-  }
+    const handleReset = () => {
+        setShowGenderForm(true);
+        setGender('');
+        setShowBreedForm(false);
+        setGenderInBreed([]);
+        setFilteredArrayForCards([]);
+        setDogsToShow([]);
+    }
 
-  return (
-    <Container>
+    return (
+        <>           
+    
+            {
+                showGenderForm &&
+                <>
+                    <HeadlineContainer>
+                        <h2>Select Dog's Gender</h2>
+                    </HeadlineContainer>
+                    {/* NOTE: clicking a tile will trigger onSubmit */}
+                    <form onSubmit={handleGenderSubmit}>
+                        <TileContainer>
+                            <MaleTile 
+                                as='button'
+                                value='male'
+                                onClick={event => setGender(event.target.value)}
+                            />
+                            <FemaleTile 
+                                as='button'
+                                value='female'
+                                onClick={event => setGender(event.target.value)}
+                            />     
+                        </TileContainer>           
+                    </form>
+                </>
+            }
 
-      <QuestionContainer>
-        <GenderContainer>
-          {
-            showGenderForm &&
-            <>
-            <h3>Good Boy? Or, Good Girl?</h3>
-            <form onSubmit={handleGenderSubmit}>
-              <select onChange={(e) => setGender(e.target.value)}>
-                <option disabled selected>
-                  Select your option
-                </option>
-                <option value="male">Boy</option>
-                <option value="female">Girl</option>
-              </select>
-              <button type="submit">Submit</button>
-            </form>
-            </>
-          }
-        </GenderContainer>
+            {
+                showBreedForm &&               
+                    <>
+                        <HeadlineContainer>
+                            <h2>Select a {gender} among these breeds</h2>
+                        </HeadlineContainer>
+                            <BreedFormContainer>
+                            <form onSubmit={handleBreedSubmit}>
+                                 <BreedDropdown onChange={(e) => setBreed(e.target.value)}>
+                                    <option disabled selected>
+                                        Select a Breed
+                                    </option>
+                                        {genderInBreed.map((item, i)=> (
+                                        <option key={i} value={item}>{item}
+                                    </option>))}
+                                </BreedDropdown>
+                                <button type="submit">Submit</button>
+                            </form>
+                            </BreedFormContainer>
+                    </>
+            }
 
-        {
-          showSelectBreed &&
-          <BreedContainer>
-          {
-            showBreedForm &&
-            <>
-              <h3>Choose a Breed</h3>
-                <form onSubmit={handleBreedSubmit}>
-                  <select onChange={(e) => setBreed(e.target.value)}>
-                    <option disabled selected>
-                      Select a Breed
-                    </option>
-                      {dogs.map((item, i)=> (
-                        <option key={i} value={item.breed}>{item.breed}</option>
-                      ))}
-                  </select>
-                  <button type="submit">Submit</button>
-                </form>
-            </>
-          }
-        
-          </BreedContainer>
-        }
-      </QuestionContainer>
+            <CardContainer>
+            {
+             
+                dogsToShow !== [] &&
+                dogsToShow.map((item, i) => (
+                    <Card key={i} 
+                        image={item.image._meta.url}
+                        name={item.name}
+                        age={item.birthDay ? `born ${item.birthDay}` : `approximately ${item.ageGuessMonths} months`}
+                        weight={item.weightPounds}
+                        disability={item.disability ? item.disability : ""}
+                        rescue={item.rescue ? 'yes' : ""}
+                        kidFriendly={item.kidFriendly ? "yes" : "no"}
+                        catFriendly={item.catFriendly ? "yes" : "no"}
+                        onlyDog={item.only ? "no" : "gets along with other dogs!"}
+                        houseTrained={item.houseTrained ? "yes" : "needs some help!"}
+                        leashTrained={item.leashTrained ? "yes" : "needs some help!"}
+                        inFoster={item.inFoster ? "yes" : ""}
+                        notes={item.notes ? item.notes : ""}
+                    />                    
+                ))
+              
+            }
+            </CardContainer>
 
-      <ResultsContainer>
-        {showGenderSelection && <h2>You have chosen a {gender}!</h2>}
-        {gender !== "" && gender === 'male' && showGenderSelection ? <p>There are {boyDogs.length} boys</p> : 
-        gender !== "" && gender === 'female' && showGenderSelection ? <p>There are {girlDogs.length} girls</p>  : 
-        "" }
-        {showBreedChoice && <h2>You have chosen {breed}!</h2>}
-        {numberOfGenderInBreed && numberOfGenderInBreed !== "nada" ? <p>There are {numberOfGenderInBreed} {gender} {breed}s</p> :
-        numberOfGenderInBreed && numberOfGenderInBreed === "nada" ? <p>There are no {gender} {breed}s</p> :
-        ""}
-      </ResultsContainer>
+            <ResetContainer>
+                <ResetButton onClick={handleReset}>
+                    Reset Form
+                </ResetButton>  
+            </ResetContainer>
 
-    </Container>
+        </>
+    )
+}
 
-  );
-};
-
-export default Search;
+export default Search
