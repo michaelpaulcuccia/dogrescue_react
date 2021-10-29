@@ -12,9 +12,13 @@ const HeadlineContainer = styled.div`
     padding: 15px 0;
 
     h2 {
-        color: ${palette.PURPLE};
+        color: ${palette.BLUE};
         font-family: "Gochi Hand", cursive;
         font-size: 36px;
+
+        @media (max-width: 875px) {
+            font-size: 24px;
+        }
     }
 `;
 
@@ -72,14 +76,14 @@ const BreedFormContainer = styled.div`
         margin: 15px auto;
         height: 25px;
         width: 80px;
-        border: 2px solid ${palette.PURPLE};
+        border: 2px solid ${palette.BLUE};
         border-radius: 25px;
         color: ${palette.PURPLE};
         font-size: 14px;
         cursor: pointer;
 
         &:hover {
-            border: 3px solid ${palette.PURPLE};
+            border: 3px solid ${palette.BLUE};
             box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
             font-weight: 600;
         }
@@ -88,7 +92,7 @@ const BreedFormContainer = styled.div`
 `;
 
 const BreedDropdown = styled.select`
-    border: 2px solid ${palette.PURPLE};
+    border: 2px solid ${palette.BLUE};
     border-radius: 25px;
     padding: 3px 0;
     color: ${palette.PURPLE};
@@ -98,7 +102,7 @@ const BreedDropdown = styled.select`
     cursor: pointer;
 
     &:hover {
-        border: 3px solid ${palette.PURPLE};
+        border: 3px solid ${palette.BLUE};
         box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;   
         font-weight: 600;
     }
@@ -110,7 +114,12 @@ const CardContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 15px;
-    `;
+
+    @media (max-width: 875px) {
+        flex-direction: column;
+        align-items: center;
+    }
+`;
 
 const ResetContainer = styled.div`
     width: 100%;

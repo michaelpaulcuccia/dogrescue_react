@@ -10,8 +10,7 @@ const Container = styled.div`
     border-radius: 25px;
     border: 2px solid black;  
     font-family: "Gochi Hand", cursive;
-    margin-left: 7.5px;
-    margin-right: 7.5px;
+    margin: 5px 7.5px;
 
     img {
         margin-bottom: 5px;
