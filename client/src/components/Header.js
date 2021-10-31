@@ -5,6 +5,7 @@ import * as palette from "../constants/palette";
 const Container = styled.div`
   width: 100%;
   height: 150px;
+  margin-top: 3px;
   display: flex;
   background-color: ${palette.BLUE};
 
