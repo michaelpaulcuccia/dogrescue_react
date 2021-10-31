@@ -18,6 +18,7 @@ const Container = styled.div`
 
   @media (max-width: 875px) {
     flex-direction: column;
+    height: 325px;
   }
 `;
 
@@ -31,7 +32,7 @@ const HeroText = styled.p`
 
   @media (max-width: 875px) {
     padding-top: 5px;
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .best_friend {
@@ -45,7 +46,7 @@ const HeroText = styled.p`
     margin-left: 95px;
 
     @media (max-width: 875px) {
-      font-size: 38px;
+      font-size: 34px;
     }
   }
 `;

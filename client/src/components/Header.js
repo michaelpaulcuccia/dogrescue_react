@@ -68,18 +68,40 @@ const EyebrowContainer = styled.div`
   text-align: center;
   font-family: "Gochi Hand", cursive;
   padding-top: 5px;
-  height: 50%;
   width: 100%;
+  height: 100%;
   position: relative;
 
   @media (max-width: 875px) {
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 
-const TabContainer = styled.div`
-  height: 50%;
+const LinkContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  ul {
+    display: flex;
+    list-style-type: none;
+    color: ${palette.OFF_WHITE};
+    font-size: 38px;
+    font-family: "Gochi Hand", cursive;
+
+    @media (max-width: 875px) {
+      font-size: 18px;
+    }
+
+    li {
+      padding: 10px 25px;
+
+      @media (max-width: 875px) {
+        padding: 10px;
+      }
+    }
+  }
 `;
 
 const RightContainer = styled.div`
@@ -99,7 +121,13 @@ const Header = () => {
           “A dog is the only thing on earth that loves you more than he loves
           himself.”
         </EyebrowContainer>
-        <TabContainer></TabContainer>
+        <LinkContainer>
+          <ul>
+            <li>Home</li>
+            <li>Dogs</li>
+            <li>About</li>
+          </ul>
+        </LinkContainer>
       </MidSection>
       <RightContainer></RightContainer>
     </Container>
