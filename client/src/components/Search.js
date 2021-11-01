@@ -123,6 +123,7 @@ const ResetContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 `;
 
 const ResetButton = styled.button`
