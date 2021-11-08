@@ -8,8 +8,8 @@ const CardWrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-content: center;
-    
+    justify-items: center;
+   
 `;
 
 const AllDogs = ({ dogs }) => {
