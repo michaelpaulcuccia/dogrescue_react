@@ -34,6 +34,9 @@ const IconContainer = styled.div`
 
     i {
         margin: 25px;
+        @media (max-width: 875px) {
+            margin: 15px;
+        }
     }
 
     //in-between sizing
@@ -42,7 +45,7 @@ const IconContainer = styled.div`
     }
 
     @media (max-width: 875px) {
-        height: 70px;
+        height: 60px;
     }
 `;
 

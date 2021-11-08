@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import Home from './pages/Home'
+import Home from './pages/Home';
+import AllDogs from './pages/AllDogs';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,11 +29,19 @@ const App = () => {
       <Wrapper>
         <Switch>
         <Route
+              exact
               path='/'
               render={(props) => (
                 <Home {...props} dogs={dogs} />
               )}
-            />
+        />
+        <Route
+              exact
+              path='/alldogs'
+              render={(props) => (
+                <AllDogs {...props} dogs={dogs} />
+              )}
+        />        
         </Switch>
       </Wrapper>
     </Router>
