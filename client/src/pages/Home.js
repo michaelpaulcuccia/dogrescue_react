@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import HeroBanner from "../components/HeroBanner";
 import Search from "../components/Search";
 import Success from "../components/Success";
+import Footer from "../components/Footer";
 
 const Home = (props) => {
 
@@ -12,6 +13,7 @@ const Home = (props) => {
       <HeroBanner />
       <Search dogs={props.dogs} />
       <Success dogs={props.dogs}/>
+      <Footer />
     </>
   );
 };
