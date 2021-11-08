@@ -26,6 +26,10 @@ const IconContainer = styled.div`
     i {
         margin: 25px;
     }
+
+    @media (max-width: 1145px){
+        font-size: 50px;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -42,6 +46,10 @@ const TextContainer = styled.div`
         span {
             color: ${palette.BLUE};
         }
+
+        @media (max-width: 1145px){
+            font-size: 32px;
+        }
     }
 
     p {
@@ -51,6 +59,10 @@ const TextContainer = styled.div`
         span {
             font-weight: bold;
             color: ${palette.BLUE};
+        }
+
+        @media (max-width: 1145px){
+            font-size: 18px;
         }
     }
 
