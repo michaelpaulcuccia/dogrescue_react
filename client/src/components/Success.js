@@ -7,12 +7,21 @@ const Container = styled.div`
     height: 275px;
     margin: 10px auto;
     border: 10px solid ${palette.BLUE};
+
+    @media (max-width: 875px) {
+        width: 350px;
+        height: 550px;
+    }
 `;
 
 const ContentBox = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
+
+    @media (max-width: 875px) {
+        flex-direction: column;
+    }
 `;
 
 const IconContainer = styled.div`
@@ -27,8 +36,13 @@ const IconContainer = styled.div`
         margin: 25px;
     }
 
+    //in-between sizing
     @media (max-width: 1145px){
         font-size: 50px;
+    }
+
+    @media (max-width: 875px) {
+        height: 70px;
     }
 `;
 
@@ -41,14 +55,21 @@ const TextContainer = styled.div`
     font-size: 26px;
     text-shadow: 2px 2px rgb(0 0 0 / 10%);
 
+    @media (max-width: 875px) {
+        width: 100%;
+        margin-left: 10px;
+    }
+
     h2 {
         padding-top: 10px;
         span {
             color: ${palette.BLUE};
         }
 
+        //in-between sizing
         @media (max-width: 1145px){
             font-size: 32px;
+            padding-top: 20px;
         }
     }
 
@@ -61,6 +82,7 @@ const TextContainer = styled.div`
             color: ${palette.BLUE};
         }
 
+        //in-between sizing
         @media (max-width: 1145px){
             font-size: 18px;
         }
@@ -86,10 +108,18 @@ const ImageContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+    @media (max-width: 875px) {
+        width: 100%;
+    }
+
     img {
         height: 220px;
         width: 220px;
         border-radius: 5px;
+
+        @media (max-width: 875px) {
+            margin-bottom: 20px;
+        }
     }
 `;
 
