@@ -2,14 +2,16 @@ import React from "react";
 import HeroBanner from "../components/HeroBanner";
 import Search from "../components/Search";
 import Success from "../components/Success";
+import LearnMore from "../components/LearnMore";
 
 const Home = (props) => {
 
   return (
     <>
       <HeroBanner />
-      <Search dogs={props.dogs} />
       <Success dogs={props.dogs}/>
+      <Search dogs={props.dogs} />
+      <LearnMore />
     </>
   );
 };

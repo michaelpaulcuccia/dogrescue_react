@@ -220,7 +220,7 @@ const Search = (props) => {
       {showGenderForm && (
         <>
           <HeadlineContainer>
-            <h2>Select Dog's Gender</h2>
+            <h2>Search By Gender</h2>
           </HeadlineContainer>
           {/* NOTE: clicking a tile will trigger onSubmit */}
           <form onSubmit={handleGenderSubmit}>

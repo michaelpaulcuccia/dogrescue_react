@@ -155,7 +155,7 @@ const Success = ({ dogs }) => {
                 </IconContainer>
                 <TextContainer>
                     <h2>Every <span>Dog</span> <br/>Deserves Their Day</h2>
-                    <p>Learn More About our Feature Dog, <br/> <span>{successDog.name}</span> And Their Success Story</p>
+                    <p>Learn More About our Featured Dog, <br/> <span>{successDog.name}</span> And Their Success Story</p>
                     <button onClick={handleLearnMore} className='success_button'>Learn More</button>
                 </TextContainer>
                 <ImageContainer>
