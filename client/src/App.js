@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import AllDogs from './pages/AllDogs';
+import About from './pages/About';
+import SuccessDog from './pages/SuccessDog';
+import Learn from './pages/Learn';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,6 +32,7 @@ const App = () => {
   return (
     <Router>
       <Wrapper>
+        <Header/>
         <Switch>
         <Route
               exact
@@ -42,7 +48,29 @@ const App = () => {
                 <AllDogs {...props} dogs={dogs} />
               )}
         />        
+        <Route
+              exact
+              path='/about'
+              render={(props) => (
+                <About {...props} dogs={dogs} />
+              )}
+        />        
+        <Route
+              exact
+              path='/successdog'
+              render={(props) => (
+                <SuccessDog {...props} dogs={dogs} />
+              )}
+        />        
+        <Route
+              exact
+              path='/learn'
+              render={(props) => (
+                <Learn {...props} dogs={dogs} />
+              )}
+        />        
         </Switch>
+        <Footer />
       </Wrapper>
     </Router>
   

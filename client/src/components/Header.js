@@ -100,6 +100,11 @@ const LinkContainer = styled.div`
       @media (max-width: 875px) {
         padding: 10px;
       }
+
+      a {
+        text-decoration: none;
+        color: ${palette.OFF_WHITE};
+      }
     }
   }
 `;
@@ -123,9 +128,10 @@ const Header = () => {
         </EyebrowContainer>
         <LinkContainer>
           <ul>
-            <li>Home</li>
-            <li>Dogs</li>
-            <li>About</li>
+            <li><a href='/'>Home</a></li>
+            <li><a href='/alldogs'>Dogs</a></li>
+            <li><a href='/about'>About</a></li>
+            <li><a href='/learn'>Learn</a></li>
           </ul>
         </LinkContainer>
       </MidSection>

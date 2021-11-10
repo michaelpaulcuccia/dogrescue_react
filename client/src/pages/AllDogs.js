@@ -1,14 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from "../components/Header";
 import Card from '../components/Card'
-import Footer from "../components/Footer";
 
 const CardWrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+
+    @media(max-width: 1030px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media(max-width: 950px) {
+        grid-template-columns: 1fr;
+    }
+  
    
 `;
 
@@ -17,7 +24,6 @@ const AllDogs = ({ dogs }) => {
 
     return (
         <>
-            <Header />
                 <CardWrapper>
                 {dogs !== [] &&
                     dogs.map((item, i) => (
@@ -43,7 +49,6 @@ const AllDogs = ({ dogs }) => {
                         />
                     ))}
                 </CardWrapper>
-            <Footer />
         </>
     )
 }

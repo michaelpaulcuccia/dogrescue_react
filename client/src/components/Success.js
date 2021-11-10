@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 import * as palette from "../constants/palette";
 
@@ -127,16 +128,21 @@ const ImageContainer = styled.div`
 `;
 
 
-const Success = props => {
+const Success = ({ dogs }) => {
 
     let successDog;
-    let dogs = props.dogs;
-
+    
     dogs.forEach(dog => {
         if (dog.successDog === true) {
             successDog = dog;
         }
     })
+
+    let history = useHistory();
+
+    const handleLearnMore = () => {
+        history.push('/successdog')
+    }
 
     return (
         <>
@@ -150,7 +156,7 @@ const Success = props => {
                 <TextContainer>
                     <h2>Every <span>Dog</span> <br/>Deserves Their Day</h2>
                     <p>Learn More About our Feature Dog, <br/> <span>{successDog.name}</span> And Their Success Story</p>
-                    <button className='success_button'>Learn More</button>
+                    <button onClick={handleLearnMore} className='success_button'>Learn More</button>
                 </TextContainer>
                 <ImageContainer>
                     <img src={successDog.image._meta.url} alt={successDog.name} />
