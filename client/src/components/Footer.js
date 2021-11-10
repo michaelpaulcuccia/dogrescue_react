@@ -4,7 +4,7 @@ import * as palette from "../constants/palette";
 
 const Container = styled.div`
   width: 100%;
-  height: 200px;
+  height: 175px;
   margin-top: 3px;
   display: flex;
   flex-direction: column;
