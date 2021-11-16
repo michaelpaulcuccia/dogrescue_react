@@ -14,6 +14,10 @@ const Container = styled.div`
 const ContentBox = styled.div`
     display: flex;
     justify-content: center;
+
+    @media (max-width: 875px) {
+        flex-direction: column;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -26,6 +30,10 @@ const TextContainer = styled.div`
     padding-top: 15px;
     //extra bottom padding to contain Learn More Button
     padding-bottom: 3px;
+
+    @media (max-width: 875px) {
+        width: 100%;
+    }
 
     h2 {
         //https://css-tricks.com/snippets/css/fluid-typography/
@@ -47,6 +55,10 @@ const TextContainer = styled.div`
 const ImageContainer = styled.div`
     width: 40%;
     height: 100%;
+
+    @media (max-width: 875px) {
+        width: 100%;
+    }
 
     img {
         width: 100%;

@@ -45,12 +45,13 @@ const TextContainer = styled.div`
 
     @media (max-width: 875px) {
         width: 100%;
-        padding-left: 10px;
+        padding-left: 20px;
     }
 
     h2 {
         //https://css-tricks.com/snippets/css/fluid-typography/
         font-size: calc(22px + 6 * ((100vw - 320px) / 680));
+        padding-bottom: 10px;
         span {
             color: ${palette.BLUE};
         }
@@ -64,6 +65,7 @@ const TextContainer = styled.div`
 
         @media (max-width: 875px) {
             padding-bottom: 5px;
+            padding-right: 10px;
         }
 
         span {
@@ -112,7 +114,7 @@ const Success2 = ({ dogs }) => {
                   </IconContainer>
                   <TextContainer>
                   <h2>Every <span>Dog</span> <br/>Deserves Their Day</h2>
-                    <p>Learn More About our Featured Dog, <span>{successDog.name}</span> And Their <br/>Success Story</p>
+                    <p>Learn More About our Featured Success Dog, <span>{successDog.name}</span> And Their Story</p>
                     <LearnMoreButton page={'successdog'} />
                   </TextContainer>
                   <ImageContainer>
