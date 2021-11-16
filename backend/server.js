@@ -1,12 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import Routes from "./Routes.js";
-import { MONGO_URI } from "./URI.js";
-
-//initialize dotenv
-//dotenv.config();
-//import dotenv from 'dotenv';
-//process.env.MONGO_URI,
+import path from 'path';
+//import { MONGO_URI } from "./URI.js";
 
 //initialize express
 const app = express();
@@ -14,7 +10,7 @@ const app = express();
 //Database Connection with Mongoose
 (async () => {
   try {
-    const conn = await mongoose.connect(MONGO_URI, {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -29,6 +25,20 @@ const app = express();
 
 //Routes
 app.use("/api", Routes);
+
+//deployment
+const __dirname = path.resolve();
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/client/build')))
+
+    app.get('*', (req, res) =>
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    )
+} else {
+    app.get('/', (req, res) => {
+        res.send('API is running....')
+    })
+}
 
 const PORT = process.env.PORT || 5000;
 
