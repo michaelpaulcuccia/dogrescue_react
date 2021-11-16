@@ -1,134 +1,66 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import LearnMoreButton from './LearnMoreButton';
 import * as palette from "../constants/palette";
 
 const Container = styled.div`
-    width: 70%;
-    height: 275px;
+    width: 80%;
     margin: 10px auto;
+    padding: 15px 0px;
     border: 10px solid ${palette.BLUE};
-
-    @media (max-width: 875px) {
-        width: 350px;
-        height: 550px;
-    }
 `;
 
 const ContentBox = styled.div`
-    height: 100%;
-    width: 100%;
     display: flex;
-
-    @media (max-width: 875px) {
-        flex-direction: column;
-    }
+    justify-content: center;
 `;
 
 const IconContainer = styled.div`
-    height: 100%;
-    width: 15%;
     display: flex;
-    justify-content: flex-start;
-    font-size: 65px;
+    justify-content: center;
+    padding-top: 20px;
+    width: 20%;
+    height: 100%;
+    font-size: 85px;
     color: ${palette.BLUE};
-
-    i {
-        margin: 25px;
-        @media (max-width: 875px) {
-            margin: 15px;
-        }
-    }
-
-    //in-between sizing
-    @media (max-width: 1145px){
-        font-size: 50px;
-    }
-
-    @media (max-width: 875px) {
-        height: 60px;
-    }
 `;
 
 const TextContainer = styled.div`
-    height: 100%;
-    width: 45%;
+    width: 40%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     font-family: sans-serif;
     font-size: 26px;
     text-shadow: 2px 2px rgb(0 0 0 / 10%);
 
-    @media (max-width: 875px) {
-        width: 100%;
-        margin-left: 10px;
-    }
-
     h2 {
-        padding-top: 10px;
         span {
             color: ${palette.BLUE};
-        }
-
-        //in-between sizing
-        @media (max-width: 1145px){
-            font-size: 32px;
-            padding-top: 20px;
         }
     }
 
     p {
-        padding-top: 10px;
-        font-size: 22px;
-
-        span {
-            font-weight: bold;
-            color: ${palette.BLUE};
-        }
-
-        //in-between sizing
-        @media (max-width: 1145px){
-            font-size: 18px;
-        }
+        font-size: 26px;
+        //Margin for button
+        margin-bottom: 15px;
     }
-
-    .success_button {
-        margin-top: 15px;
-        height: 30px;
-        width: 85px;
-        font-size: 12px;
-        padding: 3px;
-        border-radius: 5px;
-        background-color: ${palette.PURPLE};
-        color: ${palette.OFF_WHITE};
-    }
- 
 `;
 
 const ImageContainer = styled.div`
-    height: 100%;
     width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 875px) {
-        width: 100%;
-    }
-
     img {
         height: 220px;
         width: 220px;
         border-radius: 5px;
-
-        @media (max-width: 875px) {
-            margin-bottom: 20px;
-        }
     }
 `;
 
-
-const Success = ({ dogs }) => {
+const Success2 = ({ dogs }) => {
 
     let successDog;
     
@@ -138,36 +70,31 @@ const Success = ({ dogs }) => {
         }
     })
 
-    let history = useHistory();
-
-    const handleLearnMore = () => {
-        history.push('/successdog')
-    }
-
     return (
         <>
-        {
-            successDog !== undefined ?
-            <Container>
-            <ContentBox>
-                <IconContainer>
+            {
+                dogs && successDog ?  
+                <Container>
+                <ContentBox>
+                  <IconContainer>
                     <i className="fas fa-paw"></i>
-                </IconContainer>
-                <TextContainer>
-                    <h2>Every <span>Dog</span> <br/>Deserves Their Day</h2>
+                  </IconContainer>
+                  <TextContainer>
+                  <h2>Every <span>Dog</span> <br/>Deserves Their Day</h2>
                     <p>Learn More About our Featured Dog, <br/> <span>{successDog.name}</span> And Their Success Story</p>
-                    <button onClick={handleLearnMore} className='success_button'>Learn More</button>
-                </TextContainer>
-                <ImageContainer>
+                    <LearnMoreButton page={'successdog'} />
+                  </TextContainer>
+                  <ImageContainer>
                     <img src={successDog.image._meta.url} alt={successDog.name} />
-                </ImageContainer>
-            </ContentBox>
-        </Container>
-        :
-        <h2>Loading...</h2>
-        }
+                  </ImageContainer>
+                </ContentBox>
+            </Container>
+            :
+            <p>Loading</p>
+            }
+           
         </>
     )
 }
 
-export default Success
+export default Success2

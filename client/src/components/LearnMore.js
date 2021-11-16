@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import LearnMoreButton from './LearnMoreButton';
 import * as palette from "../constants/palette";
 import meatball from '../images/meatball.png'
 
@@ -65,6 +65,8 @@ const TextContainer = styled.div`
 
     p {
         font-size: 20px;
+        //Margin for button
+        margin-bottom: 15px;
 
         @media (max-width: 1000px){
             font-size: 18px;
@@ -74,26 +76,9 @@ const TextContainer = styled.div`
             font-size: 16px;
         }
     }
-
-    .learn_button {
-        margin-top: 15px;
-        height: 30px;
-        width: 85px;
-        font-size: 12px;
-        padding: 3px;
-        border-radius: 5px;
-        background-color: ${palette.PURPLE};
-        color: ${palette.OFF_WHITE};
-    }
 `;
 
 const LearnMore = () => {
-
-    let history = useHistory();
-
-    const handleLearnMore = () => {
-        history.push('/learn')
-    }
 
     return (
         <Container>
@@ -103,7 +88,7 @@ const LearnMore = () => {
             <TextContainer>
                 <h2>Learn more about <span>adopting</span> and find helpful tips on raising a dog</h2>
                 <p>Bringing home a new dog is exciting, but there can be challenges! It's important to be equipped with the right mindset. We offer learning resources to help guide you through the process of adoption and adapting to a new life with your dog.</p>
-                <button onClick={handleLearnMore} className='learn_button'>Learn More</button>
+                <LearnMoreButton page={'learn'} />
             </TextContainer>
         </Container>
     )

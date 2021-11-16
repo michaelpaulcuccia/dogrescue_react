@@ -1,12 +1,12 @@
 import React from 'react';
-import Success2 from '../components/Success2';
+import Success from '../components/Success';
 
 const SuccessDog = ({dogs}) => {
 
     return (
         <div>
             Hello, from SuccessDog.js
-            <Success2 dogs={dogs}/>
+            <Success dogs={dogs}/>
         </div>
     )
 }
